@@ -1,0 +1,19 @@
+#Classes:
+
+#Fields- attribute or properties
+
+#Methods- functions that belong to a specific class
+
+#Constructors- special methods, defined with init(),
+#used to instantiate an object of this class
+
+#Self- a keyword used to refer to class-level variables
+#and methods.(Have scopes across entire class)
+
+class Complex:
+    def __init__(self, realpart, imagpart):
+        self.r = realpart
+        self.i = imagpart
+
+x = Complex(3.0, -4.5)
+x.r, x.i

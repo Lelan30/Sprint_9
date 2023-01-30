@@ -1,0 +1,126 @@
+import random
+
+
+class Student():
+
+    def __init__(self, age, name, school):
+        self.age = age
+        self.name = name
+        self.school = school
+
+
+    def introduce_self(self):
+        return f'Hello my name is {self.age}. I am {self.name} years old, and I attend {self.school}.'
+
+class BloomTechStudent(Student):
+
+    def __init__(self, name, age, school, track, cohort):
+        super().__init__(name, age, school)
+        self.track = track
+        self.cohort = cohort
+
+    def flex(self):
+        self.cohort += 1
+
+def student_generator(num_students=30):
+
+    #Generate a list of 30 Bloomtech students
+    first_names = ['Rick','Bobby','Laura','Chad','Amanda']
+    last_names = ['Bosman', 'Henrick', 'White','Pharma','Pharnsworth']
+
+    random_first_names = random.choice(first_names)
+    random_last_names =  random.choice(last_names)
+
+    random_name = random_first_names + " " + random_last_names
+
+    age = random.randint(10, 100)
+
+    school = 'Bloomtech'
+
+    track = random.choice(['Web', 'DS', 'Backend'])
+
+    cohort = random.randint(1, 50)
+
+    students = []
+    for i in range(num_students):
+        students.append(BloomTechStudent(
+            random_name, age, school, track, cohort))
+
+    return students
+
+student_list = student_generator()
+
+print(student_list)
+
+print(student_list[0].age)
+print(student_list[0].school)
+print(student_list[0].name)
+print(student_list[0].introduce_self())
+print(student_list[0].track)
+print(student_list[0].cohort)
+student_list[0].flex()
+print(student_list[0].cohort)
+
+
+###############CODE_REVIEW######################
+
+### IN style_example.py FILE###
+
+#what would you say if you were working with someone and this is the code they gave you?
+
+import math
+import sys
+
+def exampl1():
+  ### THIS IS A LONG COMMENT AND should be wrapped to fit within a 72 character limit
+  some_tuple =(1,2, 3,'a');
+  some_variable={
+                "long":'LONG CODE LINES should be wrapped within 79 character to prevent page cutoff stuff',
+                'other':[
+                     math.pi,
+                          100,
+                          200,
+                          300,
+                          9999292929292,
+                          "This IS a long string that looks gross and goes beyond what it should"],
+                "more": {
+                     "inner": "THIS whole logical line should be wrapped"},
+                "data": [
+                     444,
+                     5555,
+                     222,
+                     3,
+                     3,
+                     4,
+                     4,
+                     5,
+                     5,
+                     5,
+                     5,
+                     5,
+                     5,
+                     5]}
+  return (some_tuple, some_variable)
+
+def example_2(): return {"has_key() is deprecated": True}
+
+class Example3(object):
+    def __init__(self, bar):
+        if bar:
+            bar += 1;
+            bar=bar* bar;
+            return bar
+        else:
+            some_string = """
+                  INDENTATION IN MULTIPLE STRINGS SHOULD NOT BE TOUCHED only actual code should be reindented,
+THIS IS MORE CODE
+"""
+            return (sys.path, some_string)
+
+
+
+
+
+
+
+        

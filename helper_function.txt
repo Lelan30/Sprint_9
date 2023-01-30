@@ -1,0 +1,239 @@
+import pandas as pd
+
+df = pd.DataFrame({'a': [1,2,3],'b': [4,5,6]})
+
+if __name__ == '__main__':
+
+#Attributes: Variables that form part of an object
+    print(df.shape)
+    print(df.dtypes)
+    print(df.index)
+    print(df.columns)
+
+#Methods: Functions that for part of an object
+    print(df.head())
+    print(df.describe())
+    print(df.isnull())
+
+#Series Object in pandas
+    print(df['a'].value_counts())
+
+### Wallet ###
+
+class Wallet:
+
+    #First thing to run when making new class
+    #Perameters with default is optional
+    def __init__(self, initial_amount=0):
+
+        #Save user provided intial_amount as attribute
+        #self refers to object your working with
+        self.balance = initial_amount
+
+        #Spend cash method
+    def spend_cash(self, amount):
+        if self.balance < amount:
+            return "Not Enough Money"
+        else:
+            self.balance = self.balance - amount
+            return f"Wallet with Balance of: ${self.balance}"
+
+    def add_cash(self, amount):
+        self.balance = self.balance + amount
+        return f"new_balance_of: {self.balance}"
+
+    # __repr__ method
+    # Changes how the object looks when printed out
+    # self allows to acces and modify class attributes
+    def __repr__(self):
+        return f"Wallet with balance of: ${self.balance}"
+
+
+if __name__ == '__main__':
+    wallet1 = Wallet(100)
+    wallet2 = Wallet(500)
+    wallet3 = Wallet(30)
+    print(wallet1.add_cash(60))
+    print(wallet1.spend_cash(180))
+    print(wallet1.spend_cash(120))
+    print(wallet1.balance)
+    print(wallet2)
+
+
+### Vehicle ###
+##Parent Class##
+
+#Hypothetically You'd want to list these vehicles on craigslist
+class Vehicle:
+
+    def __init__(self, make, model, color, year, mileage):
+        self.make = make
+        self.model = model
+        self.color = color
+        self.year = year
+        self.mileage = mileage
+
+    def honk(self):
+        return "HOOOOOOOOOOOOOONK!!"
+
+    def drive(self, miles_driven):
+        self.mileage += miles_driven
+        return self.mileage
+
+    def __repr__(self):
+        return f"A {self.color} {self.year} {self.make} {self.model} with {self.mileage} miles"
+
+if __name__ == '__main__':
+    my_vehicle = Vehicle('Nissan','Ultima','grey', 2015, 40000)
+
+    print(my_vehicle.make)
+    print(my_vehicle.color)
+    print(my_vehicle.mileage)
+
+    print(my_vehicle.honk)
+    print(my_vehicle.drive(2000))
+    print(my_vehicle.mileage)
+
+    print(my_vehicle)
+
+###Vehicle2(Specified Vehicle)###
+##Child Class(Inhereted)###
+#super.__init__ carrys parent class method in automatically
+#Hypothetically You'd want to list these vehicles on craigslist
+class Convertable:
+
+    def __init__(self, make, model, color, year, mileage, top_down=True):
+	super().__init__(make, model, color, year, mileage)
+        self.make = make
+        self.model = model
+        self.color = color
+        self.year = year
+        self.mileage = mileage
+        self.top_down = top_down
+
+    def honk(self):
+        return "HOOOOOOOOOOOOOONK!!"
+
+    def drive(self, miles_driven):
+        self.mileage += miles_driven
+        return self.mileage
+
+    def change_top_status(self):
+        if self.top_down:
+            self.top_down = False
+            return "Top is now up"
+        else:
+            self.top_down = True
+            return "Top is now down"
+
+    def __repr__(self):
+        return f"A {self.color} {self.year} {self.make} {self.model} with {self.mileage} miles (Convertable)"
+
+if __name__ == '__main__':
+    my_convertable = Convertable('Nissan','Ultima','grey', 2015, 40000)
+
+    print(my_convertable.make)
+    print(my_convertable.color)
+    print(my_convertable.mileage)
+
+    print(my_convertable.honk)
+    print(my_convertable.drive(2000))
+    print(my_convertable.mileage)
+
+    print(my_convertable)
+    print(my_convertable.top_down)
+    print(my_convertable.change_top_status())
+    print(my_convertable.top_down)
+
+    print(my_vehile.honk)
+
+
+#########Stylized_P8P#######################
+
+import math, sys;
+
+def example():
+    ####This is a long comment. This should be wrapped to fit within 72
+    # characters.
+    some_tuple=( 1,2,3,'a' );
+    some_variable={
+        'long':'long code lines whould be wrapped within 79 characters.',
+        'other':[
+            math.pi,
+            100,
+            200,
+            300,
+            987654321,
+            'This is a long string that goes on'],
+        'more':{
+            'inner': 'This whole logical line should be wrapped.',
+            some_tuple:[
+                1,
+                20,
+                300,
+                40000,
+                5000000000,
+                6000000000000]}}
+    return (some_tuple, some_variable)
+
+def example2(): return ('' in {'f', 2}) in {'has_key() is depreciated': True}
+
+class Example3(object):
+    def __init__(self, bar):
+        # Comment should have space after hash
+        if bar:
+            bar += 1
+            bar = bar * bar
+            return bar
+        else:
+            some_string = """
+                    Indentation in multiline strings should not be touched.
+Only actual code should be reindented.
+"""
+            return (sys.path, some_string)
+
+#########Docker#######################
+
+#Real power with DOCKER is customizing your own container,
+#running your own reproducible code in a variety of enviroments
+
+#Write a docker file to customize your docker - a text file "recipe"
+#specifies the container\Linux distribution your basing the computer on
+#then add enviromental setups
+
+FROM debain
+### So logging/io works reliably w/Docker
+ENV PYTHONBUFFERED = 1
+### UTF Python issue for Click package (pipenv dependency)
+ENV LC_ALL=C.UTF-8
+ENC LANG=C.UTF-8
+### Need to explicitly set this so `pipenv shell` works
+ENV SHELL=/bin/bash
+
+### Basic Python dev dependencies
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install python3-pip curl -y && \
+    pip3 install pipenv
+
+#Put the above in a Dockerfile
+#docker build . -t python
+#Wait(may take awhile, especially if its your first container)
+#docker run -it python /bin/bash
+
+#########Comments/READMEs#######################
+
+### Inline comment
+
+### A brief annotation, to indicate meaning, or a "trick" in a few 
+### lines of code
+
+"""
+Multi
+Line
+Comment
+"""
+
+""" 
+aka docstrings, are documentation, and can describe details such as 
+arguments and return types of a function, links, etc """

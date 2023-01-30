@@ -1,0 +1,42 @@
+# To write unit test, we will use unittest,
+# testcase: the indivudual unit of testing
+# (unittest provides a base class, TestCase which may be used to create
+# new test cases)
+
+# testsuite: a collection of testcases, testsuites or both
+# (used to aggragate test that should work together)
+
+# testrunner: a component in which orchestrates the execution of tests and
+# provides the outcome to the user
+# (graphical interfaces, textural interfaces, or return a specified value
+# to indicate results)
+
+# A package included in python stamdard library
+
+import unittest
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
+if __name__ == '__main__':
+    unittest.main()
+
+# Save code as 'stringtest.py' file
+# execute with 'python string_test.py' in the terminal
+
+# The overall test case is a class inhereted from unittest.TestCase
+# and methods in the class are specific test
+
+# Above is the minimal viable approach to testing basic code behavior

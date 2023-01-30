@@ -1,0 +1,41 @@
+import math, sys;
+
+def example():
+    ####This is a long comment. This should be wrapped to fit within 72
+    # characters.
+    some_tuple=( 1,2,3,'a' );
+    some_variable={
+        'long':'long code lines whould be wrapped within 79 characters.',
+        'other':[
+            math.pi,
+            100,
+            200,
+            300,
+            987654321,
+            'This is a long string that goes on'],
+        'more':{
+            'inner': 'This whole logical line should be wrapped.',
+            some_tuple:[
+                1,
+                20,
+                300,
+                40000,
+                5000000000,
+                6000000000000]}}
+    return (some_tuple, some_variable)
+
+def example2(): return ('' in {'f', 2}) in {'has_key() is depreciated': True}
+
+class Example3(object):
+    def __init__(self, bar):
+        # Comment should have space after hash
+        if bar:
+            bar += 1
+            bar = bar * bar
+            return bar
+        else:
+            some_string = """
+                    Indentation in multiline strings should not be touched.
+Only actual code should be reindented.
+"""
+            return (sys.path, some_string)
